@@ -26,5 +26,12 @@ namespace BestBuyBestPractices
         {
             return _conn.Query<Product>("SELECT * FROM products;");
         }
+
+        public void DeleteProduct(int id)
+        {
+            _conn.Execute("DELETE FROM sales WHERE Product ID = @id;", new { id = id });
+            _conn.Execute("DELETE FROM reviews WHERE Product ID = @id;", new { id = id });
+            _conn.Execute("DELETE FROM products WHERE Product ID = @id;", new { id = id });
+        }
     }
 }
